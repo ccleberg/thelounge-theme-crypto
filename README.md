@@ -11,7 +11,7 @@
 </h1>
 
 <h3 align="center">
-	Retro & high-contrast theme
+	Minimal black terminal theme
 </h3>
 
 <p align="center">

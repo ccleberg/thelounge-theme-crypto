@@ -9,29 +9,441 @@ GitHub: https://github.com/aynik
 */
 
 :root {
-  --link-color: #00ff0e;
+  --crypto-black: #000;
+  --crypto-panel: #050805;
+  --crypto-panel-soft: #0a0f0a;
+  --crypto-border: #263426;
+  --crypto-text: #d7d7d7;
+  --crypto-muted: #777;
+  --crypto-dim: #6f7d6f;
+  --crypto-nick: #9fd6a9;
+  --crypto-accent: #00ff41;
+  --crypto-danger: #ff3b30;
+  --crypto-highlight: rgba(0, 255, 65, 0.1);
+  --crypto-highlight-border: rgba(0, 255, 65, 0.8);
+  --body-color: var(--crypto-text);
+  --body-color-muted: var(--crypto-muted);
+  --body-bg-color: var(--crypto-black);
+  --button-color: var(--crypto-accent);
+  --button-text-color-hover: var(--crypto-black);
+  --link-color: var(--crypto-accent);
+  --window-bg-color: var(--crypto-black);
+  --window-heading-color: var(--crypto-muted);
+  --date-marker-color: rgba(0, 255, 65, 0.35);
+  --unread-marker-color: rgba(255, 59, 48, 0.6);
+  --highlight-bg-color: var(--crypto-highlight);
+  --highlight-border-color: var(--crypto-highlight-border);
+  --upload-progressbar-color: var(--crypto-accent);
+}
+
+::placeholder {
+  color: var(--crypto-dim);
 }
 
 body {
-  background: #000;
-  font: 16px Consolas, Menlo, Monaco, "Lucida Console", "DejaVu Sans Mono", "Courier New", monospace;
+  background: var(--crypto-black);
+  color: var(--crypto-text);
+  font: 15px Menlo, Consolas, Monaco, "Adwaita Mono", "Liberation Mono", "Lucida Console", monospace;
 }
 
+a,
+.link,
+button.link {
+  color: var(--crypto-accent);
+}
+
+a:hover,
+.link:hover,
+button.link:hover {
+  color: #8cff9f;
+}
+
+.irc-fg2 {
+  color: #7ab7ff;
+}
+
+.window,
+#chat .chat,
+#chat .chat-content,
+#chat .messages,
+#chat .userlist,
+.header,
+#form,
+#sidebar,
+#footer,
+#context-menu,
+.context-menu,
+.textcomplete-menu {
+  background: var(--crypto-black);
+  color: var(--crypto-text);
+}
+
+#windows .window h1,
 #windows .window h2,
 #windows .window h3 {
-  color: #666;
+  color: var(--crypto-muted);
+  letter-spacing: 0;
 }
 
 #windows .window h2 {
-  border-bottom: none;
+  border-bottom: 1px solid var(--crypto-border);
 }
 
 .container {
   margin: 40px auto;
 }
 
-#sign-in label {
-  color: #666;
+.header,
+#chat .header,
+#form,
+#chat .userlist,
+#chat .content,
+.userlist-open .chat-view[data-type="channel"] .scroll-down {
+  border-color: var(--crypto-border);
+}
+
+.header .title {
+  color: var(--crypto-text);
+}
+
+.header .topic,
+#windows .header .topic {
+  color: var(--crypto-muted);
+  line-height: 1.5;
+}
+
+.header button:focus-visible {
+  box-shadow: inset 0 0 0 1px var(--crypto-accent);
+  outline: 1px solid var(--crypto-accent);
+  outline-offset: -1px;
+}
+
+#chat button.close,
+#chat button.mentions,
+#chat button.menu,
+#chat button.search,
+#viewport .lt,
+#viewport .rt {
+  color: var(--crypto-muted);
+}
+
+#chat button.close:hover,
+#chat button.mentions:hover,
+#chat button.menu:hover,
+#chat button.search:hover,
+#viewport .lt:hover,
+#viewport .rt:hover {
+  color: var(--crypto-accent);
+}
+
+#context-menu {
+  border: 1px solid var(--crypto-border);
+  box-shadow: none;
+}
+
+#context-menu .context-menu-item {
+  color: var(--crypto-text);
+}
+
+#context-menu .context-menu-item:hover,
+#context-menu .context-menu-item:focus {
+  background: var(--crypto-panel-soft);
+  color: var(--crypto-accent);
+}
+
+#context-menu .context-menu-divider {
+  background: var(--crypto-border);
+}
+
+#sidebar .logo-inverted {
+  display: none;
+}
+
+#sidebar .logo {
+  display: inline;
+}
+
+#sidebar button,
+#sidebar .chan,
+#sidebar .empty,
+.channel-list-item,
+#footer button {
+  color: var(--crypto-muted);
+}
+
+#sidebar .chan.lobby,
+.channel-list-item[data-type="lobby"] {
+  color: var(--crypto-accent);
+}
+
+#sidebar .active,
+#sidebar button:hover,
+#sidebar .chan:hover,
+.channel-list-item:hover,
+.channel-list-item.active,
+#footer button:hover,
+#footer button.active {
+  background: var(--crypto-panel-soft);
+  color: var(--crypto-text);
+}
+
+.channel-list-item .badge,
+#chat .count::before {
+  background: var(--crypto-panel-soft);
+  color: var(--crypto-muted);
+}
+
+#chat .userlist .count {
+  background: var(--crypto-panel-soft);
+}
+
+.channel-list-item .badge.highlight {
+  background: var(--crypto-accent);
+  color: var(--crypto-black);
+}
+
+.channel-list-item:focus-visible,
+#sidebar button:focus-visible,
+#footer button:focus-visible {
+  box-shadow: inset 0 0 0 1px var(--crypto-accent);
+  outline: 1px solid var(--crypto-accent);
+  outline-offset: -1px;
+}
+
+#chat .time {
+  color: var(--crypto-dim);
+}
+
+#chat .from {
+  color: var(--crypto-text);
+}
+
+#chat .content {
+  border-left: 1px solid var(--crypto-border);
+}
+
+#chat .self .content,
+#chat .unhandled .from,
+#chat .msg[data-type="unhandled"] .from,
+#chat .msg[data-type="condensed"] .content,
+#chat .msg[data-type="away"] .content,
+#chat .msg[data-type="back"] .content,
+#chat .msg[data-type="join"] .content,
+#chat .msg[data-type="kick"] .content,
+#chat .msg[data-type="mode"] .content,
+#chat .msg[data-type="nick"] .content,
+#chat .msg[data-type="chghost"] .content,
+#chat .msg[data-type="part"] .content,
+#chat .msg[data-type="quit"] .content,
+#chat .msg[data-type="topic"] .content,
+#chat .msg[data-type="topic_set_by"] .content {
+  color: var(--crypto-muted);
+}
+
+.user,
+#chat .user,
+.inline-channel {
+  color: var(--crypto-nick);
+  font-weight: 700;
+}
+
+a:focus-visible,
+button.link:focus-visible {
+  box-shadow: inset 0 0 0 1px var(--crypto-accent);
+  outline: 1px solid var(--crypto-accent);
+  outline-offset: -1px;
+}
+
+.header .topic a,
+.header .topic .link,
+#chat .content a,
+#chat .content .link {
+  color: var(--crypto-accent);
+  font-weight: 700;
+}
+
+#chat .userlist .user {
+  color: var(--crypto-muted);
+  font-weight: 600;
+}
+
+#chat .userlist .user:hover,
+#chat .userlist .user.active {
+  color: var(--crypto-accent);
+}
+
+#chat .msg[data-type="action"] .from,
+#chat .msg[data-type="action"] .content,
+#chat .msg[data-type="action"] .user,
+#chat .msg[data-type="notice"] .time,
+#chat .msg[data-type="wallops"] .time,
+#chat .msg[data-type="notice"] .content,
+#chat .msg[data-type="wallops"] .content,
+#chat .msg[data-type="notice"] .user,
+#chat .msg[data-type="wallops"] .user {
+  color: #8cff9f;
+}
+
+#chat .msg[data-type="error"],
+#chat .msg[data-type="error"] .from,
+#connection-error,
+#user-visible-error,
+#settings .error {
+  color: var(--crypto-danger);
+}
+
+#connection-error,
+#user-visible-error {
+  background: var(--crypto-black);
+  border-top: 1px solid var(--crypto-danger);
+  border-bottom: 1px solid var(--crypto-danger);
+}
+
+#chat .chat-view[data-type="channel"] .msg.highlight {
+  background-color: var(--crypto-highlight);
+  border-left: 5px solid var(--crypto-highlight-border);
+}
+
+#chat .chat-view[data-type="channel"] .msg.highlight .time {
+  color: #8cff9f;
+  padding-left: 5px;
+}
+
+#chat .chat-view[data-type="channel"] .msg.highlight .content {
+  border-left-color: transparent;
+}
+
+#chat .date-marker-text::before,
+#chat .unread-marker-text::before {
+  background: var(--crypto-black);
+}
+
+#chat .scroll-down-arrow {
+  background: var(--crypto-black);
+  border-color: var(--crypto-accent);
+  box-shadow: none;
+  color: var(--crypto-accent);
+}
+
+#chat .scroll-down:hover .scroll-down-arrow {
+  background: var(--crypto-accent);
+  color: var(--crypto-black);
+}
+
+#chat .msg[data-type="monospace_block"] .text,
+#chat pre,
+#chat code {
+  background: var(--crypto-panel);
+  border: 1px solid var(--crypto-border);
+  color: var(--crypto-text);
+}
+
+.input {
+  background: var(--crypto-black);
+  border-color: var(--crypto-border);
+  color: var(--crypto-text);
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.input:disabled {
+  background: var(--crypto-panel);
+  color: var(--crypto-dim);
+}
+
+.input:not(:disabled):hover,
+.input:not(:disabled):focus {
+  border-color: var(--crypto-accent);
+  box-shadow: 0 0 0 1px rgba(0, 255, 65, 0.35);
+  outline: none;
+}
+
+.header .topic-input,
+#form #nick,
+#form #input,
+#windows #form .input,
+#windows select.input {
+  background: var(--crypto-black);
+  border-color: var(--crypto-border);
+  color: var(--crypto-text);
+  font-family: inherit;
+}
+
+#windows select.input {
+  height: 38px;
+}
+
+.btn {
+  background: var(--crypto-black);
+  border-color: var(--crypto-accent);
+  color: var(--crypto-accent);
+}
+
+.btn:focus-visible {
+  box-shadow: inset 0 0 0 1px var(--crypto-accent);
+  outline: 1px solid var(--crypto-accent);
+  outline-offset: -1px;
+}
+
+.btn:disabled {
+  background: var(--crypto-black);
+  color: var(--crypto-dim);
+}
+
+.btn:not(:disabled):hover,
+.btn:not(:disabled):focus {
+  background: var(--crypto-accent);
+  color: var(--crypto-black);
+}
+
+#form button:focus-visible {
+  box-shadow: inset 0 0 0 1px var(--crypto-accent);
+  outline: 1px solid var(--crypto-accent);
+  outline-offset: -1px;
+}
+
+#chat .show-more .btn {
+  background: var(--crypto-black);
+}
+
+#form {
+  border-top: 1px solid var(--crypto-border);
+}
+
+#form #input {
+  font-size: 14px;
+}
+
+#form #input:focus,
+.header .topic-input:focus {
+  border-color: var(--crypto-accent);
+  box-shadow: 0 0 0 1px rgba(0, 255, 65, 0.35);
+  outline: none;
+}
+
+#form #nick {
+  background: var(--crypto-panel);
+  color: var(--crypto-muted);
+}
+
+#form #upload,
+#form #submit,
+#footer .icon {
+  color: var(--crypto-muted);
+}
+
+#form #upload:hover,
+#form #submit:hover,
+#footer button:hover .icon,
+#footer button.active .icon {
+  color: var(--crypto-accent);
+}
+
+#sign-in label,
+#settings .settings-menu,
+#settings label,
+#settings .opt {
+  color: var(--crypto-muted);
 }
 
 #sign-in label input {
@@ -39,70 +451,55 @@ body {
   font-size: 14px;
 }
 
-.btn {
-  border-color: #00ff0e;
-  color: #00ff0e;
-}
-
-.btn:disabled,
-.btn:hover {
-  background: #00ff0e;
-}
-
-#connection-error {
-  background: #f00;
-}
-
 #settings .opt {
-  line-height: 20px;
-  font-size: 12px;
+  display: block;
+  font-size: 14px;
+  line-height: 1.45;
+  padding: 6px 0;
 }
 
-#sidebar .chan.lobby {
-  color: #00ff0e;
+#settings .settings-menu .active,
+#settings .settings-menu .active .icon,
+#settings label:hover,
+#settings .opt:hover {
+  color: var(--crypto-text);
 }
 
-#sidebar button,
-#sidebar .chan,
-#chat .time,
-#chat .count::before,
-#sidebar .empty {
-  color: #666;
+#settings .opt input {
+  margin-right: 8px;
 }
 
-#chat .unhandled .from {
-  color: #ddd;
+#settings .settings-sync-panel {
+  background: var(--crypto-panel);
+  border: 1px solid var(--crypto-border);
+  color: var(--crypto-muted);
 }
 
-#sidebar .active {
-  color: #fff;
+#settings .settings-sync-panel .btn {
+  border-color: var(--crypto-accent);
+  color: var(--crypto-accent);
 }
 
-#windows .header .topic,
-.messages .msg,
-.userlist {
-  line-height: 1.8;
+#settings #play,
+#settings .extra-help,
+#settings h2 .extra-help {
+  color: var(--crypto-muted);
 }
 
-#chat .user {
-  color: black;
-  font-weight: bold;
+#settings #play:hover,
+#settings .extra-help:hover {
+  color: var(--crypto-accent);
 }
 
-#windows #form .input {
-  font-family: inherit;
-  font-size: 12px;
+#chat table.channel-list th,
+#chat table.ban-list th,
+#chat table.invite-list th,
+#chat table.ignore-list th,
+#chat table.channel-list td,
+#chat table.ban-list td,
+#chat table.invite-list td {
+  border-bottom-color: var(--crypto-border);
 }
-
-#windows select.input {
-  height: 38px;
-}
-
-#footer .icon {
-  color: #666;
-}
-
-/* Previews */
 
 #chat .toggle-text {
   line-height: 1.4;
