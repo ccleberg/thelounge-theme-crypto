@@ -21,6 +21,9 @@ GitHub: https://github.com/aynik
   --crypto-danger: #ff3b30;
   --crypto-highlight: rgba(0, 255, 65, 0.1);
   --crypto-highlight-border: rgba(0, 255, 65, 0.8);
+  --crypto-self-bg: rgba(215, 215, 215, 0.15);
+  --crypto-self-border: rgba(215, 215, 215, 0.35);
+  --crypto-quote-bg: rgba(159, 214, 169, 0.06);
   --body-color: var(--crypto-text);
   --body-color-muted: var(--crypto-muted);
   --body-bg-color: var(--crypto-black);
@@ -222,7 +225,6 @@ button.link:hover {
   border-left: 1px solid var(--crypto-border);
 }
 
-#chat .self .content,
 #chat .unhandled .from,
 #chat .msg[data-type="unhandled"] .from,
 #chat .msg[data-type="condensed"] .content,
@@ -238,6 +240,21 @@ button.link:hover {
 #chat .msg[data-type="topic"] .content,
 #chat .msg[data-type="topic_set_by"] .content {
   color: var(--crypto-muted);
+}
+
+#chat .msg.self {
+  background-color: var(--crypto-self-bg);
+  border-left: 5px solid var(--crypto-self-border);
+}
+
+#chat .msg.self .time {
+  color: var(--crypto-muted);
+  padding-left: 5px;
+}
+
+#chat .msg.self .content {
+  border-left-color: transparent;
+  color: var(--crypto-text);
 }
 
 .user,
@@ -330,12 +347,41 @@ button.link:focus-visible {
   color: var(--crypto-black);
 }
 
+code,
+.irc-monospace {
+  background: var(--crypto-panel);
+  border: 1px solid var(--crypto-border);
+  border-radius: 2px;
+  color: var(--crypto-text);
+  padding: 2px 4px;
+}
+
 #chat .msg[data-type="monospace_block"] .text,
 #chat pre,
 #chat code {
   background: var(--crypto-panel);
   border: 1px solid var(--crypto-border);
   color: var(--crypto-text);
+}
+
+#chat pre code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+#chat blockquote,
+#chat .content blockquote {
+  background: var(--crypto-quote-bg);
+  border-left: 3px solid var(--crypto-border);
+  color: var(--crypto-muted);
+  margin: 4px 0;
+  padding: 4px 10px;
+}
+
+#chat blockquote p:last-child,
+#chat .content blockquote p:last-child {
+  margin-bottom: 0;
 }
 
 .input {
@@ -410,11 +456,14 @@ button.link:focus-visible {
   border-top: 1px solid var(--crypto-border);
 }
 
+#form:focus-within {
+  background: var(--crypto-panel);
+}
+
 #form #input {
   font-size: 14px;
 }
 
-#form #input:focus,
 .header .topic-input:focus {
   border-color: var(--crypto-accent);
   box-shadow: 0 0 0 1px rgba(0, 255, 65, 0.35);
